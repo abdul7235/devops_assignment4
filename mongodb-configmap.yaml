@@ -5,3 +5,5 @@ metadata:
 data:
   MONGO_HOST: mongodb-service
   MONGO_PORT: "27017"
+  MONGO_USERNAME: abdul
+  MONGO_PASSWORD: abc@123
