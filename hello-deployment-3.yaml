@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-deployment-3
+  labels:
+    app: hello-app-3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-app-3
+  template:
+    metadata:
+      labels:
+        app: hello-app-3
+    spec:
+      containers:
+      - name: hello-app
+        image: abdul7235/hello-app
+        ports:
+        - containerPort: 8000
+        envFrom:
+          - configMapRef:
+              name: mongo-configmap
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-app-clusterip
+spec:
+  selector:
+    app: hello-app-3 
+  type: ClusterIP
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+

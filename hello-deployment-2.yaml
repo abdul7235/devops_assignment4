@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-deployment
+  name: hello-deployment-2
   labels:
-    app: hello-app
+    app: hello-app-2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hello-app
+      app: hello-app-2
   template:
     metadata:
       labels:
-        app: hello-app
+        app: hello-app-2
     spec:
       containers:
       - name: hello-app
@@ -28,14 +28,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-app
+  name: hello-app-nodeport
 spec:
   selector:
-    app: hello-app   
-  type: LoadBalancer
+    app: hello-app-2   
+  type: NodePort
   ports:
   - protocol: TCP
     port: 8000
     targetPort: 8000
-    nodePort: 30000
+    nodePort: 30001
 
